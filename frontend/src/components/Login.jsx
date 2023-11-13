@@ -101,7 +101,7 @@ const Login = () => {
             </div>
             <div className={`${styles.normalFlex} w-full`} >
                 <h4>Not have an account?</h4>
-                <Link to ="/sign-up" className ="text-blue-600 pl-2">Sign Up</Link>
+                <Link to ="/signup" className ="text-blue-600 pl-2">Sign Up</Link>
 
             </div>
           </form>

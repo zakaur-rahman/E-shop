@@ -3,21 +3,35 @@ import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import styles from "../styles/styles.js";
 import { Link } from "react-router-dom";
 import { RxAvatar } from "react-icons/rx";
+import { server } from "../server.js";
+import axios from 'axios'
 
 const initialValues = {
   name: "",
   email: "",
   password: "",
+  
 };
 
-const Login = () => {
+const Signup = () => {
   const [values, setValues] = useState(initialValues);
 
   const [visible, setVisible] = useState(true);
   const [avatar, setAvatar] = useState(null);
 
-  const handleSignup = () => {
-    console.log("ffff");
+  const handleSignup = async (e) => {
+    e.preventDefault();
+    const newForm = new FormData();
+    newForm.append("file", avatar)
+    console.log(newForm.file);
+    
+    try{
+    await axios.post(`${server}/user/create-user`, values)
+
+    } catch(err){
+      console.log('error', err)
+    }
+    
   };
 
   const handleFileInput = (e) => {
@@ -39,7 +53,7 @@ const Login = () => {
       </div>
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
         <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-          <form className="space-y-6">
+          <form className="space-y-6" onSubmit={handleSignup}>
             <div>
               <label
                 htmlFor="name"
@@ -158,4 +172,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Signup;
